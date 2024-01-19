@@ -8,7 +8,9 @@ import pandas as pd
 # set location of database
 file_path = 'DBEC.csv'
 
+
 # setting up functions here
+# function to bring up list of commands
 def helps():
     print("all    = Display entire database.")
     print("search = Return a row containing a specific line of text.")
@@ -17,12 +19,14 @@ def helps():
     print("exit   = Close the program.")
 
 
+# function to display whole database as a spreadsheet
 def sheet():
     pd.set_option('display.width', None)
     df = pd.read_csv(file_path)
     print(df)
 
 
+# function to search database
 def search(file_path, search_term):
     with open(file_path, 'r') as file:
         csv_reader = csv.reader(file)
@@ -33,6 +37,7 @@ def search(file_path, search_term):
     return None
 
 
+# function to input search query
 def new_search():
     i = 0
     while i == 0:
@@ -48,6 +53,7 @@ def new_search():
                 print("Search term not found.")
 
 
+# function to add row to database
 def add_record():
     print("Type Course Number (5 digits):")
     course = input()[:5]  # limits no. of characters to 5, etc.
@@ -83,6 +89,7 @@ def add_record():
     # df.to_csv('DBEC.csv', index=False) # save data back into csv when completed
 
 
+# function to delete row from database
 def del_record():
     print("unfinished")
 
@@ -93,22 +100,16 @@ while d == 0:
     print("Enter command, or 'help'.")
     cmd = input()
     cmd = cmd.lower()
-    # summon list of commands
     if cmd == "help":
         helps()
-    # show whole sheet
     elif cmd == "all":
         sheet()
-    # use search function
     elif cmd == "search":
         new_search()
-    # add row to database
     elif cmd == "add":
         add_record()
-    # delete row from database
     elif cmd == "delete":
         del_record()
-    # exit the loop
     elif cmd == "exit":
         d = 1
     else:
